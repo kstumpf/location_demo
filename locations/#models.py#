@@ -1,0 +1,14 @@
+from django.db import models
+
+# Create your models here.
+class Location(models.Model):
+
+        ('culture', 'Culture'
+
+    name = models.CharField(max_length = 20)
+    type = models.CharField(max_length = 25)
+    parent = models.ForeignKey('self', related_name = "children", blank=True, null=True)
+    overlapswith = models.ManyToManyField("self", related_name = "overlapswith", blank=True)
+
+    def __unicode__(self):
+        return self.name

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+<head>
+
+{% block content %}
+  <h1>Edit {{ proverb.proverb }}</h1>
+
+  <p>
+  <form action="{% url 'proverbs:prov_edit' pk %}" method="post">{% csrf_token %}
+    <ul>
+        <li>Proverb: {{ form.proverb }}</li>
+        <li>Continent of Origin: {{ form.continent }}</li>
+        <li>Country of Origin: {{ form.country }}</li>
+        <li>City of Origin: {{ form.city }}</li>
+    </ul>
+
+    <input type="submit" value="Edit Proverb" />
+  </form></p>
+{% endblock %}

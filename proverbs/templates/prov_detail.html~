@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ proverb.proverb }}</h1>
+  <ul>
+    <li>Continent: {{ proverb.continent }}</li>
+    <li>Country: {{ proverb.country }}</li>
+    <li>City: {{ proverb.city }}</li>
+  </ul>
+  <a href="{% url 'proverbs:prov_edit' proverb.pk %}">Edit proverb</a>
+{% endblock %}

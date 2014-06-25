@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id='list'>
+  <h1>Here is a list of all proverbs currently in the database.</h1>
+  <p><ul>
+      {% for proverb in proverbs %}
+      <li><a href="{% url 'proverbs:prov_detail' proverb.pk %}">{{ proverb.proverb }}</a></li>
+      {% endfor %}
+  </ul></p>
+
+  <p><a href="{% url 'proverbs:master_create' %}">Create a new proverb!</a></p>
+</div>
+{% endblock %}

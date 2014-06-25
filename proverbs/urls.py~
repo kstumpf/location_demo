@@ -1,0 +1,9 @@
+from django.conf.urls import patterns, url
+from .views import prov_list, prov_detail, prov_create, prov_edit
+
+urlpatterns = patterns('',
+                       url(r'^prov_list/$', prov_list, name='prov_list'),
+                       url(r'^prov_detail/(?P<pk>\d+)/$', prov_detail, name='prov_detail'),
+                       url(r'^prov_create/$', prov_create, name='prov_create'),
+                       url(r'^prov_edit/(?P<pk>\d+)/$', prov_edit, name='prov_edit'),
+)

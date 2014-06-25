@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<!--
+<script type="text/javascript">
+$(document).ready(function() {
+   $('#locform').submit(function() {
+      $.ajax({
+         data: $(this).serialize(),
+         type: $(this).attr('method'),
+         url: $(this).attr('action'),
+         success: function(response) {
+            $('#loc_create').html(response);
+         },
+         error: function(e, x, r) {
+            $('#error_div').html(e);
+         }
+      });
+      return false;
+   }); 
+});
+-->
+</script>
+
+  <h1>Create a new proverb!</h1>
+  <p>
+    <form action="{% url 'proverbs:prov_create' %}" method="post" id="proverbform">
+      <div id="ajaxwrapper">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <ul>
+	<li>Proverb: {{ form.proverb }}</li>
+	<li>Culture of Origin: {{ form.culture }}</li>
+	<li>Continent of Origin: {{ form.continent }}</li>
+	<li>Country of Origin: {{ form.country }}</li>
+      </ul>
+      <p id="sendwrapper"><input type="submit" value="Submit" id="sendbutton"/></p>
+      </div>
+    </form></p>
+
+      <h3>Can't find the location you're looking for? Add a new one!</h3>
+{% endblock %}

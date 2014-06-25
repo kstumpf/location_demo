@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<p id="prov_form_p"></p>
+
+<p id="new_loc">Can't find the location you're looking for?
+<button id="loc_form_button">Add a new location!</button>
+<p id="loc_form_p"></p></p>
+
+</div>
+
+<!--This script loads the proverb creation form.
+    When someone clicks the "Add Location" button, the location creation form is loaded. -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // At once, load proverb creator.
+        $("#prov_form_p").load("../prov_create");
+
+        // If button is pressed, load location creator.
+        $("#loc_form_button").click(function(){
+            $("#loc_form_p").load("../loc_create");
+        });
+        
+        /* Create new proverb form when locations are updated.
+           Doesn't work at the moment but ideally it would reload the form, holding on to all entered data,
+           with the new location now viewable in the appropriate drop-down menu. */
+        $("#loc_form_p").bind("contentchanged", function(){
+            //Reload prov_create form.
+            $("#prov_form_p").load("../prov_create");
+        });
+    });
+</script>
+
+{% endblock %}

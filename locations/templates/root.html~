@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+{% for location in locations %}
+<li><a href="{% url 'locations:children' location.pk %}">{{ location }}</a></li>
+{% empty %}
+<li>No top level locations</li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+  

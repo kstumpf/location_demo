@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Create a new proverb!</h1>
+<div id="prov_form_div">
+<form action="{% url 'proverbs:prov_create' %}" method="post" id="proverb_form">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        <ul>
+        <!-- Enter proverb -->
+        <li>Proverb: {{ form.proverb }}</li>
+
+        <!-- Choose continent -->
+        <li><select name="continent" id="continent">
+            <option value="Z">Select a continent</option>
+            {% for continent in continent_list %}
+                <option value="{{ continent.name }}">{{ continent.name }}</option>
+            {% endfor %}
+        </select></li>
+
+        <!-- Based on continent, choose country -->
+        <li><select name="country" id="country" disabled="true">
+            <option>Select a country</option>
+        </select></li>
+
+        <!-- Choose culture -->
+        <li>Culture: {{ form.culture }}</li>
+        </ul>
+
+       <input type="submit" value="Submit" id="sendbutton"/>
+</form>
+
+
+<script>
+$(document).ready(function() {
+    $("#continent").change(function() {
+        if ($(this).val() == "Z") {
+            $("#country").html("<option>Select a country.</option>");
+            $("#country").attr('disabled', true);
+        } else {
+            var url = "/continent/" + $(this).val() + "/all_json_countries";
+            var continent = $(this).val();
+            $.getJSON(url, function(countries) {
+                var options = '<option value="Z">Select a country.</option>';
+                for (var i = 0; i < countries.length; i++) {
+                    options += '<option value="' + countries[i].pk + '">' + countries[i].fields['name'] + '</option>';
+                }
+                $("#country").html(options);
+                $("#country option:first").attr('selected', 'selected');
+                $("#country").attr('disabled', false);
+            });
+        }
+    });
+});
+</script>
+
+<!-- Keep from refreshing the page on submit.
+<script type="text/javascript">
+$(document).ready(function(){
+   var $form = $('#proverb_form');
+   $form.submit(function(){
+      $.post($(this).attr('action'), $(this).serialize(), function(response){
+            // do something here on success
+      },'json');
+      $("#prov_form_div").text("Your new proverb has been created.");
+      return false;
+   });
+}); </script> -->
+</div>
+
+{% endblock %}

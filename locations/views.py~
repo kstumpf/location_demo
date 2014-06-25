@@ -1,0 +1,84 @@
+from django.shortcuts import render_to_response, redirect, render
+from .models import Location
+
+from django.http import HttpResponseRedirect
+
+from forms import LocationForm
+from django.core.context_processors import csrf
+
+# Create your views here.
+def home(request):
+    locations = Location.objects.all()
+    context = {}
+    context['locations'] = locations
+    return render_to_response('home.html', context)
+
+def detail(request, pk, *args, **kwargs):
+    location = Location.objects.get(pk=pk)
+    overlaplist = location.overlapswith.all()
+
+    context = {}
+    context['location'] = location
+    context['overlaplist'] = overlaplist
+    
+    return render_to_response('detail.html', context)
+
+def create(request):
+    if request.POST:
+        form = LocationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # The problem w/ duplicate POST submissions is  only a problem with traditional requests. With AJAX request can simply render the success page instead of redirecting to it.
+            if request.is_ajax():
+                return render(request, 'home.html')
+#            return HttpResponseRedirect("/home/")
+            else:
+                return redirect('/home/')
+    else:
+        form = LocationForm()
+
+    context = {}
+    context.update(csrf(request))
+    
+    context['form'] = form
+
+    return render_to_response('create.html', context)
+
+
+def edit(request, pk):
+    location= Location.objects.get(pk = pk)
+    if request.POST:
+        form = LocationForm(request.POST, instance = location)
+        if form.is_valid():
+            form.save()
+            if request.is_ajax():
+                return render(request, 'home.html')
+            else:
+                return redirect('/home/')
+    else:
+        form = LocationForm(instance = location)
+
+    context = {}
+    context.update(csrf(request))
+    context['form'] = form
+    context['location'] = location
+    context['pk'] = pk
+    
+    return render_to_response('edit.html', context)
+
+def root(request, *args, **kwargs):
+
+    locations = Location.objects.filter(parent=None)
+    context = {
+        'locations' : locations,
+        }
+    return render_to_response('root.html', context)
+   
+def children(request, pk, *args, **kwargs):
+    location = Location.objects.get(pk = pk)
+    children = location.children
+    
+    context = {}
+    context['parent'] = location
+    context['children'] = children
+    return render_to_response('children.html', context)

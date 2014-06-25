@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div id="loc_div">
+    <h1>Create a new Location</h1>
+  
+    <form action="{% url 'locations:loc_create' %}" method="post" id="location_form">{% csrf_token %}
+        <ul>
+            <!-- {{ form.as_ul }} -->
+            <li>Location Name: {{ form.name }}</li>
+            <li>Type of location: {{ form.type }}</li>
+            <li>Parent of location: {{ form.parent }}</li>
+            <li>Places Location Overlaps: {{ form.overlapswith }}</li>
+        </ul>
+
+         <input type="submit" value="Submit" />
+    </form>
+
+<!-- This script prevents the form from redirecting when submitted. 
+    Instead, the form is replaced by a success message. -->
+<script type="text/javascript">
+$(document).ready(function(){
+   var $form = $('#location_form');
+   $form.submit(function(){
+      $.post($(this).attr('action'), $(this).serialize(), function(response){
+            // do something here on success
+      },'json');
+      $("#loc_div").text("Your new location has been created.");
+      // $("#loc_form_p").trigger("contentchanged");
+      return false;
+   });
+});
+</script>
+</div>
+
+{% endblock %}

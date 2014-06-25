@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ location.name }}</h1>
+  <ul>
+    <li>Location Type: {{ location.type }}</li>
+    <li>Location Parent: {{ location.parent.name }}</li>
+    <li>Locations that Overlap: <ul>{% for overlap in location.overlapswith.all %}
+      <li>{{ overlap.name }}</li>
+      {% endfor %}</ul>
+    <li>Children: <ul>{% for child in location.children.all %}
+	<li>{{ child.name }}</li>
+	{% endfor %}</ul>
+  </ul>
+  <a href="{% url 'locations:loc_edit' location.pk %}">Edit Location</a>
+{% endblock %}
+  

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>HOME</h1>
+<p><ul>
+    <li><a href="{% url 'locations:loc_root' %}">View all current locations!</a></li>
+    <li><a href="{% url 'proverbs:prov_list' %}">View all proverbs!</a></li>
+</ul></p>
+{% endblock %}
