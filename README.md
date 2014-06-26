@@ -19,12 +19,12 @@ From the command line, enter the project and sync the database by typing the fol
         python manage.py syncdb
 Then run the server with:
         python manage.py runserver
+        
+        To play with the project, add locations of different types (Continent, Country, Culture), and then create new proverbs.
 </p>
 
 <h3>Proverb Database Features Studied</h3>
 <p>This project studied the loading of separate forms to one page and the submission of said forms without redirection, all done through the use of jQuery. It also focused on creating dependent drop-downs in Django forms. This work is best shown in proverbs/templates/master_create.html & proverbs/templates/prov_create.html. 
-
-To play with the project, add locations of different types (Continent, Country, Culture), and then create new proverbs.
 
 The following tutorials and resources were used:
 <ul>
