@@ -37,7 +37,6 @@ The following tutorials and resources were used:
 <h3>Further Improvements that Could be Made</h3>
 <p>
 <ul>
-    <li>Continents with spaces in their names prevent prov_create.html's javascript call to all_json_countries from going through properly.</li>
     <li>Merge the ProverbForm with the html form to create one cohesive Proverb form that can be properly submitted to create new Proverbs.</li>
     <li>When, on the master_create page, a location form is submitted, find a way to alert the proverb form so that it can reload to show the new location. Ideally, this reload would not delete the info that had already been entered in the proverb form.</li>
 </ul></p>
