@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^master_create/$', master_create, name='master_create'),
 
     # This url is used by ajax to create the location's dependent drop down menu.
-    url(r'^continent/(?P<continent>[-\w]+)/all_json_countries/$', all_json_countries, name='all_json_countries'),
+    url(r'^continent/(?P<continent>[^%20]*[-\w]+)/all_json_countries/$', all_json_countries, name='all_json_countries'),
 )

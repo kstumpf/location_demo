@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .models import Proverb, Location
 
 from forms import ProverbForm
-from locations.forms import LocationForm
+from locations.forms import LocationForm, LocationSelectForm
 from django.core.context_processors import csrf
 
 from django.core import serializers
@@ -84,7 +84,16 @@ def prov_edit(request, pk):
 def all_json_countries(request, continent):
     '''Creates a json list of countries based on the current selected continent.
     This list is passed back to the script to finish the form selection process.'''
-    current_continent = Location.objects.get(name = continent)
+    locStr = ''
+    for i in range(len(continent)):
+      if continent[i] == "%":
+        locStr += " "
+      elif continent[i] == "2" or continent[i] == "0":
+        break
+      else:
+        locStr += continent[i]
+
+    current_continent = Location.objects.get(name = locStr)
     countries = Location.objects.all().filter(parent=current_continent)
     json_countries = serializers.serialize("json", countries)
-    return HttpResponse(json_countries, mimetype="application/javascript")
+    return HttpResponse(json_countries, content_type="application/javascript")

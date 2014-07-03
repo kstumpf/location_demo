@@ -7,7 +7,6 @@ class LocationForm(forms.ModelForm):
     	model = Location
         fields = ('name', 'type', 'parent', 'overlapswith')
 
-
 class LocationSelectForm(forms.ModelForm):
 
 	class Meta:

@@ -8,6 +8,7 @@ This project was created with:
 <ul>
     <li><a href="https://www.python.org/downloads/">Python 2.7.6</a></li>
     <li><a href="https://www.djangoproject.com/download/">Django 1.6.5</a></li>
+    <li><a href="http://getbootstrap.com/">Bootstrap 3.1.1</a></li>
     <li><a href="http://jquery.com/download/">jQuery 2.1.1</a></li>
 </ul></p>
 
