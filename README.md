@@ -4,6 +4,10 @@ location_demo
 <h3>Proverb Database: Form Testing with jQuery & AJAX</h3>
 
 <p>
+Note to Self: I've started from scratch with this concept, rejecting the tutorial previously used for something more efficient and far-reaching. This is the old version. The new version has been uploaded to the Proverbs Project, and can be accessed from there.
+</p>
+
+<p>
 This project was created with:
 <ul>
     <li><a href="https://www.python.org/downloads/">Python 2.7.6</a></li>
